@@ -149,6 +149,108 @@ architecture test of tb_alu is
     constant sra_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
     constant sra_z3   : std_logic                      := '1';
 
+    -- slt test values
+    -- abcd ef01 < 0fff ffff
+    constant slt_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant slt_b1   : std_logic_vector (31 downto 0) := x"0fff" & x"ffff";
+    constant slt_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant slt_z1   : std_logic                      := '0';
+    -- ffff ffff < 8000 0000
+    constant slt_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant slt_b2   : std_logic_vector (31 downto 0) := x"8000" & x"0000";
+    constant slt_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant slt_z2   : std_logic                      := '1';
+    -- 0000 ffff < 7fff 0000
+    constant slt_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant slt_b3   : std_logic_vector (31 downto 0) := x"7fff" & x"0000";
+    constant slt_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant slt_z3   : std_logic                      := '0';
+
+    -- sltu test values
+    -- abcd ef01 < 0fff ffff
+    constant sltu_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sltu_b1   : std_logic_vector (31 downto 0) := x"0fff" & x"ffff";
+    constant sltu_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant sltu_z1   : std_logic                      := '1';
+    -- ffff ffff < 8000 0000
+    constant sltu_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant sltu_b2   : std_logic_vector (31 downto 0) := x"8000" & x"0000";
+    constant sltu_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant sltu_z2   : std_logic                      := '1';
+    -- 0000 ffff < 7fff 0000
+    constant sltu_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant sltu_b3   : std_logic_vector (31 downto 0) := x"7fff" & x"0000";
+    constant sltu_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sltu_z3   : std_logic                      := '0';
+
+    -- sge test values
+    -- abcd ef01 >= abcdef01
+    constant sge_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sge_b1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sge_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sge_z1   : std_logic                      := '0';
+    -- ffff ffff >= 7fff ffff
+    constant sge_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant sge_b2   : std_logic_vector (31 downto 0) := x"7fff" & x"ffff";
+    constant sge_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant sge_z2   : std_logic                      := '1';
+    -- 0000 ffff >= ffff 0000
+    constant sge_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant sge_b3   : std_logic_vector (31 downto 0) := x"ffff" & x"0000";
+    constant sge_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sge_z3   : std_logic                      := '0';
+
+    -- sgeu test values
+    -- abcd ef01 >= abcdef01
+    constant sgeu_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sgeu_b1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sgeu_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sgeu_z1   : std_logic                      := '0';
+    -- ffff ffff >= 7fff ffff
+    constant sgeu_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant sgeu_b2   : std_logic_vector (31 downto 0) := x"7fff" & x"ffff";
+    constant sgeu_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sgeu_z2   : std_logic                      := '0';
+    -- 0000 ffff >= ffff 0000
+    constant sgeu_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant sgeu_b3   : std_logic_vector (31 downto 0) := x"ffff" & x"0000";
+    constant sgeu_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant sgeu_z3   : std_logic                      := '1';
+
+    -- seq test values
+    -- abcd ef01 >= abcdef01
+    constant seq_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant seq_b1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant seq_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant seq_z1   : std_logic                      := '0';
+    -- ffff ffff >= 7fff ffff
+    constant seq_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant seq_b2   : std_logic_vector (31 downto 0) := x"7fff" & x"ffff";
+    constant seq_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant seq_z2   : std_logic                      := '1';
+    -- 0000 ffff >= ffff 0000
+    constant seq_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant seq_b3   : std_logic_vector (31 downto 0) := x"ffff" & x"0000";
+    constant seq_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant seq_z3   : std_logic                      := '1';
+
+    -- sne test values
+    -- abcd ef01 >= abcdef01
+    constant sne_a1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sne_b1   : std_logic_vector (31 downto 0) := x"abcd" & x"ef01";
+    constant sne_r1   : std_logic_vector (31 downto 0) := x"0000" & x"0000";
+    constant sne_z1   : std_logic                      := '1';
+    -- ffff ffff >= 7fff ffff
+    constant sne_a2   : std_logic_vector (31 downto 0) := x"ffff" & x"ffff";
+    constant sne_b2   : std_logic_vector (31 downto 0) := x"7fff" & x"ffff";
+    constant sne_r2   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sne_z2   : std_logic                      := '0';
+    -- 0000 ffff >= ffff 0000
+    constant sne_a3   : std_logic_vector (31 downto 0) := x"0000" & x"ffff";
+    constant sne_b3   : std_logic_vector (31 downto 0) := x"ffff" & x"0000";
+    constant sne_r3   : std_logic_vector (31 downto 0) := x"0000" & x"0001";
+    constant sne_z3   : std_logic                      := '0';
+
     -- Input signals
     signal a, b       : std_logic_vector (31 downto 0);
     signal opcode     : std_logic_vector (3  downto 0);
@@ -313,6 +415,108 @@ begin
         wait for interval;
         assert res  = sra_r3 report "Erro no res teste sra 3";
         assert zero = sra_z3 report "Erro no res teste sra 3";
+        -- slt tests
+        opcode <= slt;
+        a      <= slt_a1;
+        b      <= slt_b1;
+        wait for interval;
+        assert res  = slt_r1 report "Erro no res teste slt 1";
+        assert zero = slt_z1 report "Erro no res teste slt 1";
+        a      <= slt_a2;
+        b      <= slt_b2;
+        wait for interval;
+        assert res  = slt_r2 report "Erro no res teste slt 2";
+        assert zero = slt_z2 report "Erro no res teste slt 2";
+        a      <= slt_a3;
+        b      <= slt_b3;
+        wait for interval;
+        assert res  = slt_r3 report "Erro no res teste slt 3";
+        assert zero = slt_z3 report "Erro no res teste slt 3";
+        -- sltu tests
+        opcode <= sltu;
+        a      <= sltu_a1;
+        b      <= sltu_b1;
+        wait for interval;
+        assert res  = sltu_r1 report "Erro no res teste sltu 1";
+        assert zero = sltu_z1 report "Erro no res teste sltu 1";
+        a      <= sltu_a2;
+        b      <= sltu_b2;
+        wait for interval;
+        assert res  = sltu_r2 report "Erro no res teste sltu 2";
+        assert zero = sltu_z2 report "Erro no res teste sltu 2";
+        a      <= sltu_a3;
+        b      <= sltu_b3;
+        wait for interval;
+        assert res  = sltu_r3 report "Erro no res teste sltu 3";
+        assert zero = sltu_z3 report "Erro no res teste sltu 3";
+        -- sge tests
+        opcode <= sge;
+        a      <= sge_a1;
+        b      <= sge_b1;
+        wait for interval;
+        assert res  = sge_r1 report "Erro no res teste sge 1";
+        assert zero = sge_z1 report "Erro no res teste sge 1";
+        a      <= sge_a2;
+        b      <= sge_b2;
+        wait for interval;
+        assert res  = sge_r2 report "Erro no res teste sge 2";
+        assert zero = sge_z2 report "Erro no res teste sge 2";
+        a      <= sge_a3;
+        b      <= sge_b3;
+        wait for interval;
+        assert res  = sge_r3 report "Erro no res teste sge 3";
+        assert zero = sge_z3 report "Erro no res teste sge 3";
+        -- sgeu tests
+        opcode <= sgeu;
+        a      <= sgeu_a1;
+        b      <= sgeu_b1;
+        wait for interval;
+        assert res  = sgeu_r1 report "Erro no res teste sgeu 1";
+        assert zero = sgeu_z1 report "Erro no res teste sgeu 1";
+        a      <= sgeu_a2;
+        b      <= sgeu_b2;
+        wait for interval;
+        assert res  = sgeu_r2 report "Erro no res teste sgeu 2";
+        assert zero = sgeu_z2 report "Erro no res teste sgeu 2";
+        a      <= sgeu_a3;
+        b      <= sgeu_b3;
+        wait for interval;
+        assert res  = sgeu_r3 report "Erro no res teste sgeu 3";
+        assert zero = sgeu_z3 report "Erro no res teste sgeu 3";
+        -- seq tests
+        opcode <= seq;
+        a      <= seq_a1;
+        b      <= seq_b1;
+        wait for interval;
+        assert res  = seq_r1 report "Erro no res teste seq 1";
+        assert zero = seq_z1 report "Erro no res teste seq 1";
+        a      <= seq_a2;
+        b      <= seq_b2;
+        wait for interval;
+        assert res  = seq_r2 report "Erro no res teste seq 2";
+        assert zero = seq_z2 report "Erro no res teste seq 2";
+        a      <= seq_a3;
+        b      <= seq_b3;
+        wait for interval;
+        assert res  = seq_r3 report "Erro no res teste seq 3";
+        assert zero = seq_z3 report "Erro no res teste seq 3";
+        -- sne tests
+        opcode <= sne;
+        a      <= sne_a1;
+        b      <= sne_b1;
+        wait for interval;
+        assert res  = sne_r1 report "Erro no res teste sne 1";
+        assert zero = sne_z1 report "Erro no res teste sne 1";
+        a      <= sne_a2;
+        b      <= sne_b2;
+        wait for interval;
+        assert res  = sne_r2 report "Erro no res teste sne 2";
+        assert zero = sne_z2 report "Erro no res teste sne 2";
+        a      <= sne_a3;
+        b      <= sne_b3;
+        wait for interval;
+        assert res  = sne_r3 report "Erro no res teste sne 3";
+        assert zero = sne_z3 report "Erro no res teste sne 3";
     end process;
 
 end architecture;
