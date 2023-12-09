@@ -4,17 +4,29 @@ use ieee.numeric_std.all;
 use std.textio.all;
 
 entity rom_rv is port (
-    address  : in  std_logic_vector;
-    data_out : out std_logic_vector
+    address  : in  std_logic_vector (7  downto 0);
+    data_out : out std_logic_vector (31 downto 0)
 );
 end entity rom_rv;
 
 architecture arch of rom_rv is
 
-    type mem_type is array (0 to (2 ** address'length) - 1) of std_logic_vector(data_out'range);
+    type mem_type is array (0 to 255) of std_logic_vector(31 downto 0);
 
-    signal mem : mem_type;
+    
+    impure function init_rom_hex return mem_type is
+        file text_file : text open read_mode is "rom.txt";
+        variable text_line : line;
+        variable ram_content : mem_type;
+    begin
+        for i in 0 to 255 loop
+            readline(text_file, text_line);
+            hread(text_line, ram_content(i));
+        end loop;
+        return ram_content;
+    end function;
 
+    signal mem : mem_type := init_rom_hex;
 begin
     data_out <= mem(to_integer(unsigned(address)));
 end arch;
