@@ -16,7 +16,7 @@ begin
 
     curr_value <= value;
 
-    process (clk):
+    process (clk)
     begin
         if rising_edge(clk) then
             value <= new_value;

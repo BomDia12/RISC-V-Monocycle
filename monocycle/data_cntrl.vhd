@@ -9,7 +9,7 @@ entity data_mem is port (
     funct_3    : in  std_logic_vector (2  downto 0);
     address    : in  std_logic_vector (14 downto 0);
     in_data    : in  std_logic_vector (31 downto 0);
-    out_data   : out std_logic_vector (31 downto 0);
+    out_data   : out std_logic_vector (31 downto 0)
 );
 end data_mem;
 
@@ -45,7 +45,7 @@ begin
         we       => write_data,
         address  => addr,
         data_in  => processed_in_data,
-        data_out => raw_out_data,
+        data_out => raw_out_data
     );
 
     -- Read Data
