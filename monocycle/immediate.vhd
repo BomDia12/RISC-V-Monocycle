@@ -4,7 +4,7 @@ use ieee.std_logic_arith.all;
 
 entity immediate_generator is port (
     instruction : in  std_logic_vector (31 downto 0);
-    immediate   : out signed           (31 downto 0)
+    immediate   : out std_logic_vector (31 downto 0)
 );
 end immediate_generator;
 
@@ -92,6 +92,6 @@ begin
         end case;
     end process;
 
-    immediate <= signed(final_number);
+    immediate <= final_number;
 
 end arch;

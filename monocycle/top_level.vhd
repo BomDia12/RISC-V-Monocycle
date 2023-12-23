@@ -16,7 +16,7 @@ architecture arch of top_level is
 
     component immediate_generator port (
         instruction        : in  std_logic_vector (31 downto 0);
-        immediate          : out signed           (31 downto 0)
+        immediate          : out std_logic_vector (31 downto 0)
     );
     end component;
 
@@ -38,8 +38,6 @@ architecture arch of top_level is
     component data_mem port (
         clock              : in  std_logic;
         write_data         : in  std_logic;
-        read_data          : in  std_logic;
-        funct_3            : in  std_logic_vector (2  downto 0);
         address            : in  std_logic_vector (14 downto 0);
         in_data            : in  std_logic_vector (31 downto 0);
         out_data           : out std_logic_vector (31 downto 0)
@@ -81,7 +79,7 @@ architecture arch of top_level is
     end component;
 
     component rom_rv port (
-        address           : in  std_logic_vector (7  downto 0);
+        address           : in  std_logic_vector (14 downto 0);
         data_out          : out std_logic_vector (31 downto 0)
     );
     end component;
@@ -109,8 +107,8 @@ architecture arch of top_level is
     signal   added_PC     : std_logic_vector (31 downto 0);
     signal   branch_ctrl  : std_logic;
 
-    constant interval     : time                           := 10 ps;
-    constant four         : unsigned                       := 4;
+    constant interval     : time                           := 10 ns;
+    constant four         : unsigned                       := x"00000100";
 
 begin
 
@@ -118,7 +116,7 @@ begin
     clk <= not clk after interval / 2;
 
     PC_reg        : registry             port map (
-        clock       => clk,
+        clk         => clk,
         new_value   => next_PC,
         cur_value   => curr_PC
     );
@@ -171,7 +169,7 @@ begin
         y           => alu_in_2
     );
 
-    alu           : alu                 port map (
+    alu_comp      : alu                 port map (
         opcode      => alu_op,
         a           => alu_in_1,
         b           => alu_in_2,
@@ -180,11 +178,11 @@ begin
     );
 
     -- selecting whether or not to switch PC
-    process (branch, zero)
+    process (branch, alu_res_zero)
     begin
         if branch = "11" then
             branch_ctrl <= '1';
-        elsif branch = "10" and zero = '1' then
+        elsif branch = "10" and alu_res_zero = '1' then
             branch_ctrl <= '1';
         else
             branch_ctrl <= '0';
@@ -201,9 +199,7 @@ begin
     data_memory   : data_mem            port map (
         clock       => clk,
         write_data  => mem_write,
-        read_data   => mem_read,
-        funct_3     => instruction (14 downto 12),
-        address     => alu_res     (14 downto  0),
+        address     => alu_res (14 downto  0),
         in_data     => rs2,
         out_data    => mem_res
     );

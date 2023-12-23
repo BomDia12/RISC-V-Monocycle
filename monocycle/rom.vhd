@@ -15,7 +15,7 @@ architecture arch of rom_rv is
 
     
     impure function init_rom_hex return mem_type is
-        file text_file : text open read_mode is "rom.txt";
+        file text_file : text open read_mode is "inst.txt";
         variable text_line : line;
         variable ram_content : mem_type;
     begin

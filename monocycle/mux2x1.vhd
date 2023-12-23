@@ -12,11 +12,11 @@ end mux2x1;
 
 architecture arch of mux2x1 is
 begin
-    process (ctrl, x1, x2, x3, x4)
+    process (ctrl, x1, x2)
     begin
         case ctrl is
-            when '0' => y <= x1;
-            when '1' => y <= x2;
+            when '0'    => y <= x1;
+            when others => y <= x2;
         end case;
     end process;
 end architecture;

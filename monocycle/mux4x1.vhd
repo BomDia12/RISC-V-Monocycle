@@ -17,10 +17,10 @@ begin
     process (ctrl, x1, x2, x3, x4)
     begin
         case ctrl is
-            when "00" => y <= x1;
-            when "01" => y <= x2;
-            when "10" => y <= x3;
-            when "11" => y <= x4;
+            when "00"   => y <= x1;
+            when "01"   => y <= x2;
+            when "10"   => y <= x3;
+            when others => y <= x4;
         end case;
     end process;
 end architecture;

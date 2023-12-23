@@ -10,11 +10,11 @@ entity registry is port (
 end registry;
 
 architecture arch of registry is
-    signal value : std_logic_vector (31 downto 0);
+    signal value : std_logic_vector (31 downto 0) := x"00000000";
 
 begin
 
-    curr_value <= value;
+    cur_value <= value;
 
     process (clk)
     begin
