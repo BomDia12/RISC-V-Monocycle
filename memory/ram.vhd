@@ -19,14 +19,13 @@ architecture arch of ram_rv is
     signal mem          : mem_type;
 
 begin
-
-    data_out <= mem(to_integer(unsigned(address)));
-
     process (clock)
     begin
         if rising_edge(clock) then
             if we = '1' then
                 mem(to_integer(unsigned(address))) <= data_in;
+            else
+                data_out <= mem(to_integer(unsigned(address)));
             end if;
         end if;
     end process;
