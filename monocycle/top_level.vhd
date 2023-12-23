@@ -86,7 +86,7 @@ architecture arch of top_level is
  
     signal   curr_PC      : std_logic_vector (31 downto 0);
     signal   next_PC      : std_logic_vector (31 downto 0);
-    signal   clk          : std_logic;
+    signal   clk          : std_logic                      := '0';
     signal   rs1          : std_logic_vector (31 downto 0);
     signal   rs2          : std_logic_vector (31 downto 0);
     signal   rd           : std_logic_vector (31 downto 0);
@@ -107,7 +107,7 @@ architecture arch of top_level is
     signal   added_PC     : std_logic_vector (31 downto 0);
     signal   branch_ctrl  : std_logic;
 
-    constant interval     : time                           := 10 ns;
+    constant interval     : time                           := 10 ps;
     constant four         : unsigned                       := x"00000100";
 
 begin
