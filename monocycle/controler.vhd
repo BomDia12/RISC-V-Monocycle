@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity control is port (
     instruction : in  std_logic_vector (31 downto 0);
-    -- 00 -> PC + 4; 01 & zero -> res_alu; 10 & not zero -> res_alu; 11 -> res_alu
+    -- 00 -> PC + 4; 01 & zero -> res_alu; 10 & not zero -> res_alu; 11 -> res_alu;
     branch      : out std_logic_vector (1  downto 0);
     mem_read    : out std_logic;
     -- 00 -> ULA; 01 -> data_mem; 10 -> pc + 4; 11 -> lui
@@ -15,8 +15,7 @@ entity control is port (
     -- alu_src(1) -> 0: Registry; 1: PC;
     alu_src     : out std_logic_vector (1  downto 0);
     reg_write   : out std_logic;
-    write_pc    : out std_logic;
-
+    write_pc    : out std_logic
 );
 end control;
 
@@ -32,7 +31,7 @@ begin
 
     process (opcode, funct_3, funct_7)
     begin
-        case opcode:
+        case opcode is
             when "0110111" => -- lui
                 branch     <= "00";
                 mem_read   <= '0';
@@ -71,7 +70,7 @@ begin
                 mem_write  <= '0';
                 alu_src    <= "11";
                 reg_write  <= '0';
-                case funct_3:
+                case funct_3 is
                     when "000" => -- beq
                         alu_op <= "1100";
                     when "001" => -- bne
@@ -107,7 +106,7 @@ begin
                 mem_write  <= '0';
                 alu_src    <= "01";
                 reg_write  <= '1';
-                case funct_3:
+                case funct_3 is
                     when "000" => -- addi
                         alu_op <= "0000";
                     when "010" => -- slti
@@ -136,7 +135,7 @@ begin
                 mem_write  <= '0';
                 alu_src    <= "00";
                 reg_write  <= '1';
-                case funct_3:
+                case funct_3 is
                     when "000" => 
                         if instruction(30) = 1 then -- sub
                             alu_op <= "0001";
